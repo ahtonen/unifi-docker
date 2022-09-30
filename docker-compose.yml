@@ -1,8 +1,7 @@
-version: '2.3'
+version: "2.3"
 services:
   mongo:
     image: mongo:3.6
-    container_name: ${COMPOSE_PROJECT_NAME}_mongo
     networks:
       - unifi
     restart: always
@@ -10,13 +9,13 @@ services:
       - db:/data/db
       - dbcfg:/data/configdb
   controller:
-    image: "jacobalberty/unifi:${TAG:-latest}"
-    container_name: ${COMPOSE_PROJECT_NAME}_controller
+    build:
+      context: .
     depends_on:
       - mongo
-    init: true
     networks:
       - unifi
+    network_mode: bridge
     restart: always
     volumes:
       - dir:/unifi
@@ -25,15 +24,15 @@ services:
       - cert:/unifi/cert
       - init:/unifi/init.d
       - run:/var/run/unifi
-      # Mount local folder for backups and autobackups
-      - ./backup:/unifi/data/backup
-    user: unifi
+    user: root
     sysctls:
       net.ipv4.ip_unprivileged_port_start: 0
     environment:
+      TZ: Europe/Helsinki
       DB_URI: mongodb://mongo/unifi
       STATDB_URI: mongodb://mongo/unifi_stat
       DB_NAME: unifi
+      JVM_MAX_HEAP_SIZE: 800M
     ports:
       - "3478:3478/udp" # STUN
       - "6789:6789/tcp" # Speed test
@@ -42,9 +41,15 @@ services:
       - "8880:8880/tcp" # HTTP portal redirection
       - "8843:8843/tcp" # HTTPS portal redirection
       - "10001:10001/udp" # AP discovery
+    labels:
+      io.balena.features.kernel-modules: "1"
+      io.balena.features.firmware: "1"
+      io.balena.features.dbus: "1"
+      io.balena.features.supervisor-api: "1"
+      io.balena.features.balena-api: "1"
+
   logs:
     image: bash
-    container_name: ${COMPOSE_PROJECT_NAME}_logs
     depends_on:
       - controller
     command: bash -c 'tail -F /unifi/log/*.log'
@@ -61,6 +66,7 @@ volumes:
   init:
   dir:
   run:
+
 
 networks:
   unifi:

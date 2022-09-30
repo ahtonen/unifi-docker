@@ -1,0 +1,10 @@
+.vscode
+.github
+.cache
+examples/
+tmp/
+
+*.unf
+*.md
+*.code-workspace
+
