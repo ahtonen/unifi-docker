@@ -1,16 +1,14 @@
 # Unifi-in-Balena
 
-This repo is a fork of [Jacob Alberty's Unifi-in-Docker](https://github.com/jacobalberty/unifi-docker), but with modifications needed to make it deployable to a [Balena](https://www.balena.io) fleet's device.
+This repo is a fork of [Jacob Alberty's Unifi-in-Docker](https://github.com/jacobalberty/unifi-docker), but with modifications needed to make it deployable to a [Balena fleet](https://www.balena.io).
 
 ## Motivation
 
 I have played a lot with Ubiquity's excellent network hardware. Especially the Cloud Key, which
-is running [Ubiqiti Network's](https://www.ubnt.com/) Unifi Controller, is a handy tool for
+is running [Ubiquiti Network's](https://www.ubnt.com/) Unifi Controller, is a handy tool for
 network management.
 
-However, I didn't want to buy it, but found the Dockerized version that Jacob had nicely made
-available. I could have simply run that on e.g. Raspberry Pi, in Docker Engine, but I wanted
-more robustness and being able to access my Pi from anywhere in the World.
+However, I didn't want to buy it, but found a Dockerized version of its software that Jacob had nicely made available. I could have simply run that on e.g. Raspberry Pi, in Docker Engine, but I wanted more robustness and being able to access my Pi anywhere in the World.
 
 [Balena](https://www.balena.io) is a IoT fleet service in the cloud and provides free licence
 up to 10 devices. It supports multitude of IoT devices and is build upon Docker technology.
@@ -20,9 +18,9 @@ up to 10 devices. It supports multitude of IoT devices and is build upon Docker 
 Tuning Jacob's Dockerization suitable for Balena was a small trial-and-error project, but finally
 these major changes made it a success:
 
-- switch to run container as root (because of Balena)
-- do not use initrd
+- switch to run container as root since Balena only supports that
 - apply a bunch of Balena specific labels to enable needed features
+- avoid using initrd
 
 ## Building instructions
 
