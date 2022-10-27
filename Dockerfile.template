@@ -1,10 +1,4 @@
-FROM golang:1.19.0-bullseye as permset
-WORKDIR /src
-RUN git clone https://github.com/jacobalberty/permset.git /src && \
-    mkdir -p /out && \
-    go build -ldflags "-X main.chownDir=/unifi" -o /out/permset
-
-FROM ubuntu:18.04
+FROM balenalib/%%BALENA_MACHINE_NAME%%-ubuntu:bionic
 
 LABEL maintainer="Jacob Alberty <jacob.alberty@foundigital.com>"
 
@@ -61,10 +55,6 @@ RUN set -ex \
  && useradd --no-log-init -r -u $UNIFI_UID -g $UNIFI_GID unifi \
  && /usr/local/bin/docker-build.sh "${PKGURL}"
 
-COPY --from=permset /out/permset /usr/local/bin/permset
-RUN chown 0.0 /usr/local/bin/permset && \
-    chmod +s /usr/local/bin/permset
-
 RUN mkdir -p /unifi && chown unifi:unifi -R /unifi
 
 # Apply any hotfixes that were included
@@ -79,6 +69,7 @@ EXPOSE 6789/tcp 8080/tcp 8443/tcp 8880/tcp 8843/tcp 3478/udp 10001/udp
 WORKDIR /unifi
 
 HEALTHCHECK --start-period=5m CMD /usr/local/bin/docker-healthcheck.sh || exit 1
+#HEALTHCHECK NONE
 
 # execute controller using JSVC like original debian package does
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
