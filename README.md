@@ -10,8 +10,8 @@ network management.
 
 However, I didn't want to buy it, but found a Dockerized version of its software that Jacob had nicely made available. I could have simply run that on e.g. Raspberry Pi, in Docker Engine, but I wanted more robustness and being able to access my Pi anywhere in the World.
 
-[Balena](https://www.balena.io) is a IoT fleet service in the cloud and provides free licence
-up to 10 devices. It supports multitude of IoT devices and is build upon Docker technology.
+[Balena](https://www.balena.io) is an IoT fleet service in the cloud and provides free license
+for up to 10 devices. It supports multitude of diffrent IoT boards and is build upon the Docker technology.
 
 ## End result
 
