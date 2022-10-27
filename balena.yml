@@ -1,12 +1,20 @@
-name: unifi-network-application
+name: Unifi
 type: sw.application
 description: >-
   Run Unifi Network Controller in your edge device!
+post-provisioning: >-
+  ## Usage instructions
+
+  **Application download**
+  Once you power up your device you'll need to allow some time for it to download the application, this typically takes 5-10 minutes but it can take more depending on your internet connection and what device you are using.
+
+  **Usage**
+  When the download is completed the application will start and will running at <your-device-ip>:8443. For details how to configure and use Unifi Network Application, see [this](https://help.ui.com/hc/en-us/articles/1500012237441-UniFi-Network-Use-the-UniFi-Network-Application).
 assets:
   repository:
     type: blob.asset
     data:
-      url: 'https://github.com/ahtonen/unifi-docker'
+      url: "https://github.com/ahtonen/unifi-docker"
   logo:
     type: blob.asset
     data:
@@ -14,4 +22,7 @@ assets:
         https://raw.githubusercontent.com/ahtonen/unifi-docker/master/ui.webp
 data:
   defaultDeviceType: raspberrypi3-64
+  supportedDeviceTypes:
+    - raspberrypi3-64
+    - raspberrypi4-64
 version: 7.2.94
