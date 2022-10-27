@@ -1,4 +1,4 @@
-name: Unifi Network Application
+name: unifi-network-application
 type: sw.application
 description: >-
   Run Unifi Network Controller in your edge device!
