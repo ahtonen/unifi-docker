@@ -1,0 +1,17 @@
+name: Unifi Network Application
+type: sw.application
+description: >-
+  Run Unifi Network Controller in your edge device!
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/ahtonen/unifi-docker'
+  logo:
+    type: blob.asset
+    data:
+      url: >-
+        https://raw.githubusercontent.com/ahtonen/unifi-docker/master/ui.webp
+data:
+  defaultDeviceType: raspberrypi3-64
+version: 7.2.94

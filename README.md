@@ -37,6 +37,10 @@ name is `myorg` and fleet's name `unifi`, in the project directory say:
 balena push myorg/unifi
 ```
 
+Alternatively you can try to deploy by clicking this button:
+
+[![deploy button](https://balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/ahtonen/unifi-docker&defaultDeviceType=raspberry-pi)
+
 ## Using Unifi Controller
 
 Once the application is deployed you should be able to access it from
